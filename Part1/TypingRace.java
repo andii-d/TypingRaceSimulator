@@ -1,5 +1,4 @@
 import java.util.concurrent.TimeUnit;
-import java.lang.Math;
 
 /**
  * A typing race simulation. Three typists race to complete a passage of text,
@@ -23,7 +22,7 @@ public class TypingRace
     // (Ty tuned these values "by feel". They may need adjustment.)
     private static final double MISTYPE_BASE_CHANCE = 0.3;
     private static final int    SLIDE_BACK_AMOUNT   = 2;
-    private static final int    BURNOUT_DURATION     = 3;
+    private static final int    BURNOUT_DURATION    = 3;
 
     /**
      * Constructor for objects of class TypingRace.
@@ -82,7 +81,7 @@ public class TypingRace
         // (Ty was in a hurry here)
         seat1Typist.resetToStart();
         seat2Typist.resetToStart();
-
+        seat3Typist.resetToStart();
         while (!finished)
         {
             // Advance each typist by one turn
@@ -106,6 +105,15 @@ public class TypingRace
         }
 
         // TODO (Task 2a): Print the winner's name here
+        
+        if (raceFinishedBy(seat1Typist)) {
+            System.out.println("The winner is " + seat1Typist.getName() + "!");
+        } else if (raceFinishedBy(seat2Typist)) {
+            System.out.println("The winner is " + seat2Typist.getName() + "!");
+        } else if (raceFinishedBy(seat3Typist)) {
+            System.out.println("The winner is " + seat3Typist.getName() + "!");
+        }
+
     }
 
     /**
