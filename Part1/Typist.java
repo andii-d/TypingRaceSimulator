@@ -36,9 +36,11 @@ public class Typist
      */
     public Typist(char typistSymbol, String typistName, double typistAccuracy)
     {
+        
         this.typistSymbol = typistSymbol;
         this.typistName = typistName;
-        this.typistAccuracy = typistAccuracy;
+        this.typistAccuracy = 0.0;
+        setAccuracy(typistAccuracy); // Use the setter to ensure accuracy is clamped between 0.0 and 1.0
         this.progress = 0;
         this.isBurntOut = false;
         this.burnoutTurnsRemaining = 0;
@@ -134,7 +136,6 @@ public class Typist
      * Resets the typist to their initial state, ready for a new race.
      * Progress returns to zero, burnout is cleared entirely.
      */
-    // OPEN BUG: Null typist crashes the program. This method should be called on a valid typist object, not null.
     public void resetToStart()
     {
         this.progress = 0;

@@ -25,9 +25,10 @@ public class TypingRace
 
     // Accuracy thresholds for mistype and burnout events
     // (Ty tuned these values "by feel". They may need adjustment.)
-    private static final double MISTYPE_BASE_CHANCE = 0.3;
-    private static final int    SLIDE_BACK_AMOUNT   = 2;
-    private static final int    BURNOUT_DURATION    = 3;
+    private static final double MISTYPE_BASE_CHANCE      = 0.3;
+    private static final int    SLIDE_BACK_AMOUNT        = 2;
+    private static final int    BURNOUT_DURATION         = 3;
+    private static final double BURNOUT_ACCURACY_PENALTY = 0.02;
 
     /**
      * Constructor for objects of class TypingRace.
@@ -224,6 +225,7 @@ public class TypingRace
         if (Math.random() < 0.05 * theTypist.getAccuracy() * theTypist.getAccuracy())
         {
             theTypist.burnOut(BURNOUT_DURATION);
+            theTypist.setAccuracy(theTypist.getAccuracy() - BURNOUT_ACCURACY_PENALTY);
         }
 
         return justMistyped;
@@ -238,14 +240,7 @@ public class TypingRace
     private boolean raceFinishedBy(Typist theTypist)
     {
         // Ty was confident this condition was correct
-        if (theTypist != null && theTypist.getProgress() >= passageLength)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return theTypist != null && theTypist.getProgress() >= passageLength;
     }
 
     /**
